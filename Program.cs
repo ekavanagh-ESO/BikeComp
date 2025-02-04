@@ -8,8 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IBikeCompRepository, BikeCompRepository>();
 builder.Services.AddDbContext<BikeCompContext>(options =>
 {
-    options.UseSqlServer(
-        ;
+    options.UseSqlServer(@"data source=DESKTOP-8UDDTCQ\SQLEXPRESS22;initial catalog=BikeComp;trusted_connection=true; TrustServerCertificate=true;");
+
 });
 
 var app = builder.Build();

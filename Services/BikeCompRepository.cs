@@ -20,13 +20,13 @@ namespace BikeComp.API.Services
             if (manufacturerId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(manufacturerId));
-            }
+            } 
 
             if (components == null)
             {
-                throw new ArgumentNullException(nameof(components));
+                throw new ArgumentNullException(nameof(components)); 
             }
-            components.ManufacturerId = manufacturerId; //this sucks and is wrong, look back 
+            components.ManufacturerId = manufacturerId; //!this sucks and is wrong, look back 
             _context.Components.Add(components); 
         }         
 
