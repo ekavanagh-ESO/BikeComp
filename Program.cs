@@ -1,13 +1,12 @@
 using BikeComp.API.DbContexts;
 using BikeComp.API.Services;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
+using BikeComp.API.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(BikeProfile).Assembly);
 builder.Services.AddMvcCore(options =>
 {
     options.ReturnHttpNotAcceptable = true;
@@ -17,14 +16,7 @@ builder.Services.AddMvcCore(options =>
 builder.Services.AddScoped<IBikeCompRepository, BikeCompRepository>();
 builder.Services.AddDbContext<BikeCompContext>(options =>
 {
-<<<<<<< HEAD
     options.UseSqlServer(@"data source=DESKTOP-8UDDTCQ\SQLEXPRESS22;initial catalog=BikeComp;trusted_connection=true; TrustServerCertificate=true;");
-
-=======
-    options.UseSqlServer(
-        @"data source=DESKTOP-8UDDTCQ\SQLEXPRESS22;initial catalog=BikeComp;trusted_connection=true; TrustServerCertificate=true;");
-        ;
->>>>>>> Controllers
 });
 
 var app = builder.Build();

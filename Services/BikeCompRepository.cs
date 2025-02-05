@@ -35,31 +35,30 @@ namespace BikeComp.API.Services
             _context.Components.Remove(components);
         }
   
-        public Components GetComponent(Guid manufacturerId, Guid courseId)
+        public Components GetComponent(Guid bikeId, Guid componentId)
         {
-            if (manufacturerId == Guid.Empty)
+            if (bikeId == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(manufacturerId));
+                throw new ArgumentNullException(nameof(bikeId));
             }
 
-            if (courseId == Guid.Empty)
+            if (componentId == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(courseId));
+                throw new ArgumentNullException(nameof(componentId));
             }
 
-            return _context.Components.FirstOrDefault(c => c.ManufacturerId == manufacturerId && c.Id == courseId);
+            return _context.Components.FirstOrDefault(c => c.BikeId == bikeId && c.Id == componentId);
         }
 
-        public IEnumerable<Components> GetComponents(Guid manufacturerId)
+        public IEnumerable<Components> GetComponents(Guid bikeId)
         {
-            if (manufacturerId == Guid.Empty)
+            if (bikeId == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(manufacturerId));
+                throw new ArgumentNullException(nameof(bikeId));
             }
-
             return _context.Components
-                        .Where(c => c.ManufacturerId == manufacturerId)
-                        .OrderBy(c => c.ComponentName).ToList();
+                 .Where(c => c.BikeId == bikeId)
+                .OrderBy(c => c.ComponentName).ToList();
         }
 
         public void UpdateComponent(Components components)

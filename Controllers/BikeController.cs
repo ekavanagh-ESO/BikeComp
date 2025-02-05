@@ -1,24 +1,31 @@
+using AutoMapper;
+using BikeComp.API.Entities;
+using BikeComp.API.Helpers;
+using BikeComp.API.Models;
 using BikeComp.API.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeComp.API.Controllers;
 [ApiController]
-[Route("api/bikes")]
+[Microsoft.AspNetCore.Mvc.Route("api/bikes")]
 public class BikeController : ControllerBase
 {
     private readonly IBikeCompRepository _bikeCompRepository;
-
-    public BikeController(IBikeCompRepository bikeCompRepository)
+    private readonly IMapper _mapper;
+    public BikeController(IBikeCompRepository bikeCompRepository, IMapper mapper)
     {
         _bikeCompRepository = bikeCompRepository ??
                               throw new ArgumentNullException(nameof(bikeCompRepository));
+        _mapper = mapper ??
+                  throw new ArgumentNullException(nameof(mapper));
     }
 
-    [HttpGet()]
-    public IActionResult GetBikes()
+    [HttpGet]
+    public ActionResult<IEnumerable<Bike>> GetBikes()
     {
-        var bikes = _bikeCompRepository.GetBikes();
-        return Ok(bikes);
+        var bikesDb = _bikeCompRepository.GetBikes();
+        return Ok(_mapper.Map<IEnumerable<BikeDTO>>(bikesDb));
     }
 
     [HttpGet("{id:guid}")]
@@ -30,6 +37,6 @@ public class BikeController : ControllerBase
         {
             return NotFound();    
         }
-        return Ok(bikeSpecific);
+        return Ok(_mapper.Map<BikeDTO>(bikeSpecific));
     }
 }
