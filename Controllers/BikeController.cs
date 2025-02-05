@@ -14,17 +14,22 @@ public class BikeController : ControllerBase
                               throw new ArgumentNullException(nameof(bikeCompRepository));
     }
 
-    [HttpGet]
+    [HttpGet()]
     public IActionResult GetBikes()
     {
         var bikes = _bikeCompRepository.GetBikes();
-        return new JsonResult(bikes);
+        return Ok(bikes);
     }
 
     [HttpGet("{id:guid}")]
     public IActionResult GetBikeById(Guid id)
     {
         var bikeSpecific = _bikeCompRepository.GetBike(id);
-        return new JsonResult(bikeSpecific);
+        
+        if (bikeSpecific == null)
+        {
+            return NotFound();    
+        }
+        return Ok(bikeSpecific);
     }
 }
