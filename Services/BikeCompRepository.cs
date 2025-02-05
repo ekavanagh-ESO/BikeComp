@@ -26,7 +26,7 @@ namespace BikeComp.API.Services
             {
                 throw new ArgumentNullException(nameof(components));
             }
-            components.ManufacturerId = manufacturerId; //this sucks and is wrong, look back 
+            components.ManufacturerId = manufacturerId; //!this sucks and is wrong, look back 
             _context.Components.Add(components); 
         }         
 

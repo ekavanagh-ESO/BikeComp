@@ -1,6 +1,6 @@
 @BikeComp.API_HostAddress = http://localhost:5102
 
-GET {{BikeComp.API_HostAddress}}/api/Bike
-Accept: application/json
+GET {{BikeComp.API_HostAddress}}/api/bikes
+Accept: application/xml
 
 ###
