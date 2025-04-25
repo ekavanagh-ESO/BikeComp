@@ -4,10 +4,10 @@ namespace BikeComp.API.Helpers;
 
 public static class DateTimeOffSetExtensions
 {
-    public static int GetTimeFromlastService(this Bike bike )
+    public static int GetTimeFromlastService(this DateTimeOffset serviceDate )
     {
         var currTime = DateTime.Now;
-        var diff = currTime - bike.DateOfService;
-        return diff.Hours;
+        var diff = currTime - serviceDate;
+        return diff.Days;
     }
 }

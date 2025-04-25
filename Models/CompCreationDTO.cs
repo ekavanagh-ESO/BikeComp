@@ -1,9 +1,9 @@
 namespace BikeComp.API.Models;
 
-public class ComponentDTO
+public class CompCreationDTO
 {
-    public Guid Id { get; set; }
-    public string  ComponentName { get; set; }
+    public string ComponentName { get; set; }
     public string Manufacturer { get; set; }
+    public string Description { get; set; }
     public int DaysSinceService { get; set; }
 }

@@ -1,7 +1,46 @@
 @BikeComp.API_HostAddress = http://localhost:5102
 
-GET {{BikeComp.API_HostAddress}}/api/bikes/
+GET {{BikeComp.API_HostAddress}}/api/bikes/all
 Accept: application/json
+
 ###
-GET {{BikeComp.API_HostAddress}}/api/bikes/d28888e9-2ba9-473a-a40f-e38cb54f9b3/components
+
+GET {{BikeComp.API_HostAddress}}/api/bikes/d28888e9-2ba9-473a-a40f-e38cb54f9b35/components
 Accept: application/json
+
+###
+
+GET {{BikeComp.API_HostAddress}}/api/bikes/d28888e9-2ba9-473a-a40f-e38cb54f9b35/components/d173e20d-159e-4127-9ce9-b0ac2564ad97
+Accept: application/json
+
+###
+GET {{BikeComp.API_HostAddress}}/api/bikes?bikeCategory=&searchQuery=
+Accept: application/json
+
+###
+POST {{BikeComp.API_HostAddress}}/api/bikes
+Accept: application/json
+Content-Type: application/json
+
+{
+  "BikeName": "Test",
+  "BikeType": "TestBike",
+  "Manufacturer": "Testers",
+  "Description": "Testestestest",
+  "DaysSinceService": 30
+}
+
+###
+POST {{BikeComp.API_HostAddress}}/api/bikes/d28888e9-2ba9-473a-a40f-e38cb54f9b35/components
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ComponentName": "Test",
+  "Manufacturer": "TestBike",
+  "Description": "TestComps",
+  "serviceDate": "2025-01-01T00:00:00Z"
+}
+
+###
+GET http://localhost:5102/api/bikes/d28888e9-2ba9-473a-a40f-e38cb54f9b35/components/a8c510c2-674e-42ed-28eb-08dd5b12bd45

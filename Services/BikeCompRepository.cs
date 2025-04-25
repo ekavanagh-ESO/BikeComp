@@ -3,6 +3,7 @@ using BikeComp.API.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BikeComp.API.ResourceParameters;
 
 namespace BikeComp.API.Services
 {
@@ -88,7 +89,6 @@ namespace BikeComp.API.Services
             {
                 throw new ArgumentNullException(nameof(BikeId));
             }
-
             return _context.Bikes.Any(a => a.Id == BikeId);
         }
 
@@ -110,6 +110,36 @@ namespace BikeComp.API.Services
             }
 
             return _context.Bikes.FirstOrDefault(a => a.Id == bikeId);
+        }
+
+        public IEnumerable<Bike> GetBikes(BikeParameters bikeParameters)
+        {
+            if (bikeParameters == null)
+            {
+                throw new ArgumentNullException(nameof(bikeParameters));
+            }
+            
+            if (string.IsNullOrWhiteSpace(bikeParameters.bikeCategory) &&
+                string.IsNullOrWhiteSpace(bikeParameters.SearchQuery))
+            {
+                return GetBikes();
+            }
+            
+            var coll = _context.Bikes.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(bikeParameters.bikeCategory))
+            {
+                var bCategory = bikeParameters.bikeCategory.Trim();
+                coll = coll.Where(a => a.BikeType == bCategory);
+            }
+
+            if (!string.IsNullOrWhiteSpace(bikeParameters.SearchQuery))
+            {
+                var bParameters = bikeParameters.SearchQuery.Trim();
+                coll = coll.Where(a => a.BikeType.Contains(bParameters)
+                || a.BikeName.Contains(bParameters));
+            }
+            return coll.ToList();
         }
 
         public Bike GetManufacturer(Guid bikeId)

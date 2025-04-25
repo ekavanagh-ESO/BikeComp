@@ -42,6 +42,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler(app =>
+        app.Run(async context =>
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Unexpected error. Try again later.");
+        }));
+}
 
 app.UseHttpsRedirection();
 

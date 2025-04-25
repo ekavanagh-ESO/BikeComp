@@ -11,8 +11,8 @@ public class BikeProfile : Profile
             .ForMember(
                 dest => dest.BikeName,
                 opt => opt.MapFrom(src => src.BikeName)
-                ).ForMember(
-                dest => dest.DaysSinceService,
-                opt => opt.MapFrom(src => src.GetTimeFromlastService()));
+            );
+
+        CreateMap<Models.BikeCreationDTO, Entities.Bike>();
     }
 }

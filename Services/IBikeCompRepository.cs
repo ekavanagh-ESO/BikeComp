@@ -1,4 +1,5 @@
 ﻿using BikeComp.API.Entities;
+using BikeComp.API.ResourceParameters;
 
 namespace BikeComp.API.Services
 {
@@ -10,6 +11,7 @@ namespace BikeComp.API.Services
         void UpdateComponent(Components components);
         void DeleteComponent(Components components);
         IEnumerable<Bike> GetBikes();
+        IEnumerable<Bike> GetBikes(BikeParameters bikeParameters);
         Bike GetBike(Guid bikeId);
         Bike GetManufacturer(Guid manufacturerId);
         IEnumerable<Bike> GetBikes(IEnumerable<Guid> manufacturerIds);
